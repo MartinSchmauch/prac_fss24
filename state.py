@@ -19,6 +19,7 @@ class State:
         self.patients_in_system = 0
         self.events = queue.PriorityQueue()
         self.init_resources()
+        self.test = test
         if test:
             patient_generator = Patient_Generator(runtime=running_time)
             patient_list = patient_generator.generate_patients()
@@ -44,13 +45,19 @@ class State:
     def run(self):
         time.sleep(0.1)
         # while self.time <= self.running_time:
-        while (self.events.qsize() > 0) or (self.patients_in_system > 0): # event in queue or cpee instances still running but currently no event in queue (e.g. between end of nursing and release patient)
-            time.sleep(0.5)
-            (self.time, event) = self.events.get() # wait for all patients that arrive at the exact same time, only continue when the next admission is greater than the next event
-            # check that  all the patients that arrive are matching with the expected patients
-            self.handle_event(event)
-        print("\n-------------------\nSIMULATION FINISHED\n-------------------\n")
-        return                    
+        if self.test:
+            while (self.events.qsize() > 0) or (self.patients_in_system > 0): # event in queue or cpee instances still running but currently no event in queue (e.g. between end of nursing and release patient)
+                time.sleep(0.5)
+                (self.time, event) = self.events.get() # wait for all patients that arrive at the exact same time, only continue when the next admission is greater than the next event
+                # check that  all the patients that arrive are matching with the expected patients
+                self.handle_event(event)
+            print("\n-------------------\nSIMULATION FINISHED\n-------------------\n")
+        else:
+            while True:
+                time.sleep(0.5)
+                (self.time, event) = self.events.get()
+                self.handle_event(event)
+        return
         
     def handle_event(self, event):
         if event.event_type == EventType.CREATION: # triggered by replan endpoint or initial creation

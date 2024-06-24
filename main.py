@@ -38,7 +38,7 @@ if __name__ == '__main__':
         runtime = float(sys.argv[1])
         test_run = sys.argv[2]
     else: 
-        runtime = 10
+        runtime = 10.0
         test_run = False
     state = State(running_time=runtime, test=test_run) # start simulator with parameters from the discord photo
     simulation_thread = threading.Thread(target=state.run)
