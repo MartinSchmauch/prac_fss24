@@ -52,12 +52,11 @@ def admit_patient(state):
         if surgery_queue_length > 2 or nursing_queue_length > 2: # queue longer than 2 -> replan
             available = "False"
         conn_r.close()
-    if available:
-        state.events.put((admission_time, Event(event_type=EventType.ADMISSION, 
-                                                event_start=admission_time, 
-                                                event_end=admission_time,
-                                                patient_id=patient_id,
-                                                patient_type=patient_type)))
+    state.events.put((admission_time, Event(event_type=EventType.ADMISSION, 
+                                            event_start=admission_time, 
+                                            event_end=admission_time,
+                                            patient_id=patient_id,
+                                            patient_type=patient_type)))
     return bottle.HTTPResponse(
             json.dumps({"patient_id": patient_id,
                         "available": available,

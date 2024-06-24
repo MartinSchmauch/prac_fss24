@@ -8,7 +8,7 @@ from logging_util import log_event
 from patient_generator import Patient_Generator
 
 class State:
-    def __init__(self, running_time, test=False, patient_types_path='patient_types.json', resources_config='./db/resources/resource_config.json'):
+    def __init__(self, running_time=10, test=False, patient_types_path='patient_types.json', resources_config='./db/resources/resource_config.json'):
         self.RESOURCES_CONFIG = resources_config
         self.CALLBACK_HEADER = {
                 'content-type': 'application/json',
@@ -62,11 +62,10 @@ class State:
                       status="success", 
                       message="Cpee instance created"
                       )
-            self.patients_in_system += 1
             time.sleep(1)
             
         elif event.event_type == EventType.ADMISSION:
-            
+            self.patients_in_system += 1
             log_event(virtual_time=event.event_start,
                       patient_id=event.patient_id,
                       patient_type=event.patient_type,
@@ -142,6 +141,7 @@ class State:
                       status="failure",
                       message=f"patient got replanned to time: {event.event_end}"
                       )
+            self.patients_in_system -= 1
             self.events.put((event.event_end, Event(event_type=EventType.CREATION, 
                                                             event_start=event.event_end,
                                                             event_end = event.event_end,

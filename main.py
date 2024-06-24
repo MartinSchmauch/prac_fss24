@@ -34,8 +34,12 @@ def handle_replan_patient():
 
 if __name__ == '__main__':
     setup_logging(get_unique_log_file_name())
-    runtime = float(sys.argv[1])
-    test_run = sys.argv[2]
+    if len(sys.argv) == 3:
+        runtime = float(sys.argv[1])
+        test_run = sys.argv[2]
+    else: 
+        runtime = 10
+        test_run = False
     state = State(running_time=runtime, test=test_run) # start simulator with parameters from the discord photo
     simulation_thread = threading.Thread(target=state.run)
     simulation_thread.start()
