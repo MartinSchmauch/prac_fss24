@@ -1,0 +1,32 @@
+{
+    "resources": [
+        {"resource_type": "intake", "capacity": 10, "available_at": 0.0},
+        {"resource_type": "surgery", "capacity": 5, "available_at": 0.0},
+        {"resource_type": "nursing_a", "capacity": 30, "available_at": 0.0},
+        {"resource_type": "nursing_b", "capacity": 40, "available_at": 0.0},
+        {"resource_type": "er_treatment", "capacity": 3, "available_at": 0.0}
+    ],
+
+    "resource_planning": [
+        {"resource_name": "intake1", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake2", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake3", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake4", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake5", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake6", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake7", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake8", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake9", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "intake10", "resource_type": "intake", "available_at": 0.0},
+        {"resource_name": "er_treatment1", "resource_type": "er_treatment", "available_at": 0.0},
+        {"resource_name": "er_treatment2", "resource_type": "er_treatment", "available_at": 0.0},
+        {"resource_name": "er_treatment3", "resource_type": "er_treatment", "available_at": 0.0},
+        {"resource_name": "surgery1", "resource_type": "surgery", "available_at": 0.0},
+        {"resource_name": "surgery2", "resource_type": "surgery", "available_at": 0.0},
+        {"resource_name": "surgery3", "resource_type": "surgery", "available_at": 0.0},
+        {"resource_name": "surgery4", "resource_type": "surgery", "available_at": 0.0},
+        {"resource_name": "surgery5", "resource_type": "surgery", "available_at": 0.0},
+        {"resource_name": "nursing_a1", "resource_type": "nursing_a", "available_at": 0.0},
+        {"resource_name": "nursing_b1", "resource_type": "nursing_b", "available_at": 0.0}
+    ]
+}
