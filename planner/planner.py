@@ -40,7 +40,6 @@ class Planner:
                 "diagnosis": info["diagnosis"],
                 "sent_home_counter": 1,
                 "first_admission_time": time,
-                "last_possible_admission_time": (time + timedelta(hours=(7*24))).isoformat(),
                 "new_admission_time": (time + timedelta(hours=24)).isoformat(),
                 }
         else:

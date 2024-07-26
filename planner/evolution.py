@@ -1,11 +1,35 @@
 import random
 import json
+from datetime import datetime, timedelta
 from planners import Planner
 from plannerhelper import PlannerHelper
 from helpers import load_patient_types
 
 RESOURCE_CONFIG_PATH = "resource_config.json"
 PATIENT_CONFIG_PATH = "patient_types.json"
+
+def is_within_time_interval(subject_time, start_time, time_interval):
+    """
+    Check if genome[1]["new_admission_time"] is within the specified time interval of patient["new_admission_time"].
+
+    Parameters:
+    subject_time (str): The time to check if it is within the time interval.
+    start_time (str): The start time of the time interval.
+    time_interval (timedelta): The time interval to check within.
+
+    Returns:
+    bool: True if genome[1]["new_admission_time"] is within the specified time interval of patient["new_admission_time"], False otherwise.
+    """
+    # Parse the ISO 8601 strings into datetime objects
+    subject_time = datetime.fromisoformat(subject_time)
+    start_time = datetime.fromisoformat(start_time)
+
+    # Calculate the end of the time interval
+    interval_end_time = start_time + time_interval
+
+    # Check if genome_admission_time is within the interval
+    return start_time <= subject_time <= interval_end_time
+
 
 class Resources:
     def __init__(self):
@@ -37,13 +61,13 @@ class Evolution():
         self.cases_started = 0 # only possible with a given trace in the json
         self.er_surgery_nursing_started = {}
         self.er_treatment_finished = {}
-        self.replanned_patients = replanned_patients # key: cid, value: {diagnosis, sent_home_counter, first_admission_time, last_possible_admission_time, new_admission_time}
+        self.replanned_patients = replanned_patients # key: cid, value: {diagnosis, sent_home_counter, first_admission_time, new_admission_time}
         self.resources = Resources() # initialize resources
         self.resources.populate_resources(resources) # add current resource utilization to resources
         self.patient_types = load_patient_types(PATIENT_CONFIG_PATH)
         # evaluate arrival_rate func: arrival_rate_func = eval(f"lambda: {arrival_rate_func_str}") # see patient_generator.py
         self.time = time
-        self.population = [] # (case_id, {diagnosis, sent_home_counter, first_admission_time, last_possible_admission_time, new_admission_time})
+        self.population = [] # (case_id, {diagnosis, sent_home_counter, first_admission_time, new_admission_time})
         self.result = None
         
     def get_results(self):
@@ -54,19 +78,24 @@ class Evolution():
         Function to calculate the fitness function score for a given genome.
         
         Parameters:
-            genome (tuple list): (case_id, {diagnosis, sent_home_counter, first_admission_time, last_possible_admission_time, new_admission_time})
+            genome (tuple list): (case_id, {diagnosis, sent_home_counter, first_admission_time, new_admission_time})
         
         Returns:
             Double: fitness_value
         """
-                
+        pen_sent_home = 0
+        average_intake_time = 1
+        pen_er_treatment = 0
+        pen_processed = 0
+        
         er_treatment_duration_factor = 20
         sent_home_factor = 500
         processed_factor = 5000
         
-        # patient types: type, diagnosis, arrival_rate, treatment_durations
-        
+        # ----- er treatment waiting time -----        
         # Penality for patients that wait longer than 4 hours after ER treatment until they get processed with Nursing/Surgery
+        
+        # ----old TODO: check if this is correct
         er_treatment_2_processing = [
             (self.er_surgery_nursing_started[case_id] if case_id in self.er_surgery_nursing_started else self.time)
                - er_treatment_finished
@@ -75,18 +104,31 @@ class Evolution():
 
         pen_er_treatment = sum(er_treatment_2_processing_excessive) / self.cases_started * er_treatment_duration_factor
 
-        # patients sent home
-        time_for_intake = dict(filter(lambda k : k[0].label == HealthcareElements.TIME_FOR_INTAKE,
-                                self.simulator.event_times.items()))
-        time_for_intake_cases = [t[0].case_id for t in time_for_intake.items()]
-        intake_count = collections.Counter(time_for_intake_cases)
-        sent_home_count = sum(filter(lambda k : k > 1, intake_count.values()))
-        pen_sent_home = sent_home_count / self.cases_started * sent_home_factor
+        # ----- patients sent home -----
+        # intake takes norm(1, 0.125) hours
+        # check if at new_admission_time there are already other patients rescheduled or up to 1 hour before
+        # if so, add to sent_home_counter
+        for patient in self.replanned_patients.values():
+            if is_within_time_interval(genome[1]["new_admission_time"], patient["new_admission_time"], timedelta(hours=average_intake_time)):
+                pen_sent_home += 1
+        pen_sent_home *= sent_home_factor
+        # ----old:
+        # time_for_intake = dict(filter(lambda k : k[0].label == HealthcareElements.TIME_FOR_INTAKE,
+        #                         self.simulator.event_times.items()))
+        # time_for_intake_cases = [t[0].case_id for t in time_for_intake.items()]
+        # intake_count = collections.Counter(time_for_intake_cases)
+        # sent_home_count = sum(filter(lambda k : k > 1, intake_count.values()))
+        # pen_sent_home = sent_home_count / self.cases_started * sent_home_factor
 
-        # patients processed
-        released = len(list(filter(lambda k : k[0].label == HealthcareElements.RELEASING,
-                                self.simulator.event_times.items())))
-        pen_processed = (self.cases_started - released) * processed_factor / self.cases_started
+        # ----- patients processed -----        
+        # Penality for patients if their replan_time is not within the time interval 7 days after first_admission_time
+        if not is_within_time_interval(genome[1]["new_admission_time"], genome[1]["first_admission_time"], timedelta(days=7)):
+            pen_processed += 1
+        pen_processed *= processed_factor
+        # ----old:
+        # released = len(list(filter(lambda k : k[0].label == HealthcareElements.RELEASING,
+        #                         self.simulator.event_times.items())))
+        # pen_processed = (self.cases_started - released) * processed_factor / self.cases_started
 
         
         # Weighted sum of scores, with accuracy being twice as important
