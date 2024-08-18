@@ -15,6 +15,9 @@ def initialize_resources(config_file='./db/resources/resource_config.json', db_f
     
     conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
+    cursor.execute('''
+        DELETE FROM Resources
+    ''')
     # show all column names
     for resource_type in config['resources']: # default resource initialization
         for resource_index in range(resource_type['capacity']):
@@ -23,11 +26,11 @@ def initialize_resources(config_file='./db/resources/resource_config.json', db_f
                 INSERT OR REPLACE INTO Resources (resource_name, resource_type, available_at)
                 VALUES (?, ?, ?)
             ''', (resource_name, resource_type['resource_type'], resource_type['available_at']))
-    for resource_item in config['resource_planning']: # override specific resources
-        cursor.execute('''
-                INSERT OR REPLACE INTO Resources (resource_name, resource_type, available_at)
-                VALUES (?, ?, ?)
-            ''', (resource_item['resource_name'], resource_item['resource_type'], resource_item['available_at']))
+    # for resource_item in config['resource_planning']: # override specific resources
+    #     cursor.execute('''
+    #             INSERT OR REPLACE INTO Resources (resource_name, resource_type, available_at)
+    #             VALUES (?, ?, ?)
+    #         ''', (resource_item['resource_name'], resource_item['resource_type'], resource_item['available_at']))
     # reset queue table
     cursor.execute('''
         DELETE FROM Queue

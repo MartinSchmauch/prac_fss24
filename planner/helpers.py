@@ -1,9 +1,45 @@
 import random
 import json
+from datetime import datetime
+BASE_TIME = datetime(2018, 1, 1, 0, 0, 0)
+
+RESOURCE_MAPPING = {
+    "surgery": "OR",
+    "nursing_a": "A_BED",
+    "nursing_b": "B_BED",
+    "intake": "INTAKE",
+    "er_treatment": "ER_PRACTITIONER"
+}
+
+def convert_to_hours_since_2018(time):
+    """
+    Convert ISO 8601 datetime string to hours since 01.01.2018 0:00.
+    
+    :param time (str): ISO 8601 datetime string
+    :return: float: Hours since 01.01.2018 0:00
+    """
+    target_time = datetime.fromisoformat(time)
+    delta = target_time - BASE_TIME
+    return delta.total_seconds() / 3600
  
 def load_patient_types(path):
     with open(path, 'r') as file:
         return json.load(file)['patient_types']
+    
+def load_max_capacities(path):
+    with open(path, 'r') as file:
+        resources = json.load(file)['resources']
+        max_capacities = {}
+        for resource in resources:
+            max_capacities[resource['resource_type']] = resource['capacity']
+        max_capacities_remapped = {}
+        for name, capacity in max_capacities.items():
+            max_capacities_remapped[RESOURCE_MAPPING[name]] = capacity
+        return max_capacities_remapped
+    
+def convert_from_my_resources(resource):
+    return RESOURCE_MAPPING[resource]
+    
 
 def float_range(start, stop, step):
     while start < stop:

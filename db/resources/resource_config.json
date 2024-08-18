@@ -1,6 +1,6 @@
 {
     "resources": [
-        {"resource_type": "intake", "capacity": 10, "available_at": 0.0},
+        {"resource_type": "intake", "capacity": 5, "available_at": 0.0},
         {"resource_type": "surgery", "capacity": 5, "available_at": 0.0},
         {"resource_type": "nursing_a", "capacity": 30, "available_at": 0.0},
         {"resource_type": "nursing_b", "capacity": 40, "available_at": 0.0},
