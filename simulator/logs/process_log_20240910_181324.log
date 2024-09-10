@@ -1,0 +1,60 @@
+INFO:process_logger:0.3549 - None  - A4              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:0.2476 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:1.9769 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:1.8485 - None  - A4              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:1.3825 - None  - B3              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:1.0385 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:2.1224 - None  - A1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:2.4966 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:4.8915 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:3.0585 - None  - A4              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:3.4164 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:3.9567 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:4.847  - None  - A2              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:4.0541 - None  - B2              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:4.4155 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:5.0047 - None  - A1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:5.9057 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:5.6553 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:6.5164 - None  - A4              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:6.2301 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:7.0802 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:7.0059 - None  - A2              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:7.1194 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:7.6535 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:8.6108 - None  - A4              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:8.6121 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:8.8032 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:9.6943 - None  - A1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:9.1435 - None  - B1              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:10.9113 - None  - ER              - EventType.CREATION         - success - Initial Creation event representing 1 patient put into the queue
+INFO:process_logger:0.2476 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:0.3549 - None  - A4              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:1.0385 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:1.3825 - None  - B3              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:1.8485 - None  - A4              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:1.9769 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:2.1224 - None  - A1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:2.4966 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:3.0585 - None  - A4              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:3.4164 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:3.9567 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:4.0541 - None  - B2              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:4.4155 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:4.847  - None  - A2              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:4.8915 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:5.0047 - None  - A1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:5.6553 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:5.9057 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:6.2301 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:6.5164 - None  - A4              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:7.0059 - None  - A2              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:7.0802 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:7.1194 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:7.6535 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:8.6108 - None  - A4              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:8.6121 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:8.8032 - None  - ER              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:9.1435 - None  - B1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:9.6943 - None  - A1              - EventType.CREATION         - success - Cpee instance created
+INFO:process_logger:10.9113 - None  - ER              - EventType.CREATION         - success - Cpee instance created

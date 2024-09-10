@@ -1,15 +1,15 @@
 import sqlite3
 import json
 
-DATABASE_RESOURCES = './db/resources/resources.db'
-DATABASE_PATIENTS = './db/patients/patient.db'
+DATABASE_RESOURCES = '../db/resources/resources.db'
+DATABASE_PATIENTS = '../db/patients/patient.db'
 
 def get_db(db_path):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
-def initialize_resources(config_file='./db/resources/resource_config.json', db_file='./db/resources/resources.db'):
+def initialize_resources(config_file='../db/resources/resource_config.json', db_file='../db/resources/resources.db'):
     with open(config_file, 'r') as file:
         config = json.load(file)
     
